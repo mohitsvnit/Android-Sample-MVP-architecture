@@ -38,4 +38,14 @@ public class LoginPresenter implements LoginContract.Presenter {
             }
         });
     }
+
+    @Override
+    public void attachView(LoginContract.View view) {
+        this.view = view;
+    }
+
+    @Override
+    public void detachView() {
+        this.view =  null;
+    }
 }

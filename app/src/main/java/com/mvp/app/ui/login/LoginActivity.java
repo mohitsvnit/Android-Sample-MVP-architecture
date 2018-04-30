@@ -1,7 +1,6 @@
 package com.mvp.app.ui.login;
 
 import android.databinding.DataBindingUtil;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
@@ -19,9 +18,10 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_main);
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_login);
 
-        initPresenter();
+        setPresenter(LoginPresenter.getInstance(Injection.provideDataManager(this)
+                , this));
         initClicks();
     }
 
@@ -46,6 +46,16 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     @Override
     public void onAuthenticationFailed(String error) {
+
+    }
+
+    @Override
+    public void setPresenter(LoginContract.Presenter presenter) {
+        this.presenter = presenter;
+    }
+
+    @Override
+    public void showError(String error) {
 
     }
 }
